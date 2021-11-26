@@ -1,59 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutCompat3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <EditText
-        android:id="@+id/editTxt_lat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lat Info Here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTxt_lng"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lng Info Here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/txt_location_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="200dp"
-        android:hint="Location Info Here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/cityLabel"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="11dp"
+        android:gravity="center"
+        android:text="City:"
+        app:layout_constraintBottom_toBottomOf="@+id/cityValue"
+        app:layout_constraintEnd_toStartOf="@+id/cityValue"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <EditText
+        android:id="@+id/cityValue"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="26dp"
+        android:text="Tampa"
+        app:layout_constraintBottom_toTopOf="@+id/getWeatherBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cityLabel"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/button"
+        android:id="@+id/getWeatherBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="17dp"
         android:onClick="clickedGetLocation"
-        android:text="Get Location"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="202dp" />
-
+        android:text="Get the Weather Info"
+        app:layout_constraintEnd_toEndOf="@+id/tempVal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="120dp" />
+    <TextView
+        android:id="@+id/tempLabel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="29dp"
+        android:gravity="center"
+        android:text="Temp:"
+        app:layout_constraintBottom_toBottomOf="@+id/tempVal"
+        app:layout_constraintEnd_toStartOf="@+id/tempVal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tempVal" />
+    <TextView
+        android:id="@+id/tempVal"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="166dp"
+        android:layout_marginBottom="66dp"
+        android:gravity="center"
+        android:text="73.13"
+        app:layout_constraintBottom_toBottomOf="@+id/descValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tempLabel"
+        app:layout_constraintTop_toTopOf="@+id/getWeatherBtn" />
+    <TextView
+        android:id="@+id/descLabel"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="29dp"
+        android:gravity="center"
+        android:text="Description:"
+        app:layout_constraintBaseline_toBaselineOf="@+id/descValue"
+        app:layout_constraintEnd_toStartOf="@+id/descValue"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/descValue"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="166dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:text="overcast clouds"
+        app:layout_constraintBottom_toTopOf="@+id/seeWeatherBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descLabel" />
+    <Button
+        android:id="@+id/seeWeatherBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:onClick="clickedGo2Map"
+        android:text="See Weather on Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTxt_lng"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="89dp" />
+    <EditText
+        android:id="@+id/editTxt_lng"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="197dp"
+        android:layout_marginBottom="197dp"
+        android:hint="Lng Info Here"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGo2Map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tempLabel" />
+    <EditText
+        android:id="@+id/editTxt_lat"
+        android:layout_width="411dp"
+        android:layout_height="48dp"
+        android:hint="Lat Info Here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704" />
+    <TextView
+        android:id="@+id/txt_location_info"
+        android:layout_width="358dp"
+        android:layout_height="98dp"
+        android:hint="Location Info Here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
     <Button
         android:id="@+id/buttonGo2Map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
         android:onClick="clickedGo2Map"
         android:text="Go 2 Map"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="202dp" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        app:layout_constraintStart_toStartOf="@+id/txt_location_info"
+        app:layout_constraintTop_toBottomOf="@+id/txt_location_info"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="89dp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="6dp"
+        android:onClick="clickedGetLocation"
+        android:text="Get Location"
+        app:layout_constraintEnd_toEndOf="@+id/txt_location_info"
+        app:layout_constraintTop_toBottomOf="@+id/txt_location_info"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="120dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
