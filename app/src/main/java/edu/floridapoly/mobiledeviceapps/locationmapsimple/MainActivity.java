@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lonTxtView = findViewById(R.id.editTxt_lng);
-        latTxtView = findViewById(R.id.editTxt_lat);
         tempTxtView = findViewById(R.id.tempVal);
         descTxtView = findViewById(R.id.descValue);
         mClient = new GoogleApiClient.Builder(this).addApi(LocationServices.API)
@@ -140,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(o);
             //textViewReceivedData.setText(responseText);
             tempTxtView.setText(temp);
-            lonTxtView.setText(lon);
-            latTxtView.setText(lat);
+            //lonTxtView.setText(lon);
+            //latTxtView.setText(lat);
             descTxtView.setText(desc);
 
 
@@ -184,119 +182,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void clickedGetLocation(View view) {
-        if (hasLocationPermission()) {
-            getLocation();
-        } else {
-            requestPermissions(LOCATION_PERMISSIONS,
-                    REQUEST_LOCATION_PERMISSIONS);
-        }
-    }
-
-    public void clickedGo2Map(View view) {
+    public void clickedSeeMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
-        EditText editTextLat = findViewById(R.id.editTxt_lat);
-        String strLat = editTextLat.getText().toString();
-        EditText editTextLng = findViewById(R.id.editTxt_lng);
-        String strLng = editTextLng.getText().toString();
+        //EditText editTextLat = findViewById(R.id.editTxt_lat);
+        //String strLat = editTextLat.getText().toString();
+        //EditText editTextLng = findViewById(R.id.editTxt_lng);
+        //String strLng = editTextLng.getText().toString();
 
-        intent.putExtra("LAT", strLat);
-        intent.putExtra("LNG", strLng);
+        intent.putExtra("LAT", lat);
+        intent.putExtra("LNG", lon);
 
         startActivity(intent);
     }
-
     private boolean hasLocationPermission() {
         int result = ContextCompat
                 .checkSelfPermission(this, LOCATION_PERMISSIONS[0]);
         return result == PackageManager.PERMISSION_GRANTED;
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_LOCATION_PERMISSIONS:
-                if (hasLocationPermission()) {
-                    getLocation();
-                }
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    private void getLocation() {
-        LocationRequest request = LocationRequest.create();
-        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        request.setNumUpdates(1);
-        request.setInterval(0);
-
-
-        // Create LocationSettingsRequest object using location request
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(request);
-        LocationSettingsRequest locationSettingsRequest = builder.build();
-
-
-        // Check whether location settings are satisfied
-        // https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient
-        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
-        settingsClient.checkLocationSettings(locationSettingsRequest);
-
-        // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        getFusedLocationProviderClient(this).requestLocationUpdates(request, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        // do work here
-                        TextView textView = findViewById(R.id.txt_location_info);
-                        textView.setText("Lat: " + locationResult.getLastLocation().getLatitude() + "\n"
-                                + "Lng: " + locationResult.getLastLocation().getLongitude());
-                    }
-                },
-                Looper.myLooper());
-
-        fusedLocationClient = getFusedLocationProviderClient(getBaseContext());
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // GPS location can be null if GPS is switched off
-                        if (location != null) {
-                            Log.i(TAG, "Got a fix: " + location);
-                            Toast toast = Toast.makeText(getBaseContext(),"Got a fix: " + location,Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            TextView textView = findViewById(R.id.txt_location_info);
-                            textView.setText("Lat: " + location.getLatitude() + "\n" + "Lng: " + location.getLongitude() );
-
-                            EditText editTextLat = findViewById(R.id.editTxt_lat);
-                            editTextLat.setText(String.valueOf(location.getLatitude()));
-                            EditText editTextLng = findViewById(R.id.editTxt_lng);
-                            editTextLng.setText(String.valueOf(location.getLongitude()));
-
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("MapDemoActivity", "Error trying to get last GPS location");
-                        e.printStackTrace();
-                    }
-                });
-
-    }
-
 
     @Override
     public void onStop() {
