@@ -8,6 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <TextView
         android:id="@+id/cityLabel"
         android:layout_width="0dp"
@@ -22,30 +23,33 @@
         app:layout_constraintEnd_toStartOf="@+id/cityValue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/cityValue"
         android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginStart="136dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="168dp"
         android:layout_marginBottom="26dp"
         android:text="Tampa"
         app:layout_constraintBottom_toTopOf="@+id/getWeatherBtn"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cityLabel"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/getWeatherBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="17dp"
-        android:onClick="clickedGetLocation"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="44dp"
+        android:onClick="GetDataFRomWebService"
         android:text="Get the Weather Info"
         app:layout_constraintEnd_toEndOf="@+id/tempVal"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="120dp" />
+
     <TextView
         android:id="@+id/tempLabel"
         android:layout_width="0dp"
@@ -58,6 +62,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tempVal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tempVal" />
+
     <TextView
         android:id="@+id/tempVal"
         android:layout_width="0dp"
@@ -66,11 +71,11 @@
         android:layout_marginEnd="166dp"
         android:layout_marginBottom="66dp"
         android:gravity="center"
-        android:text="73.13"
         app:layout_constraintBottom_toBottomOf="@+id/descValue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tempLabel"
         app:layout_constraintTop_toTopOf="@+id/getWeatherBtn" />
+
     <TextView
         android:id="@+id/descLabel"
         android:layout_width="0dp"
@@ -82,6 +87,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/descValue"
         app:layout_constraintEnd_toStartOf="@+id/descValue"
         app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/descValue"
         android:layout_width="0dp"
@@ -89,22 +95,23 @@
         android:layout_marginEnd="166dp"
         android:layout_marginBottom="35dp"
         android:gravity="center"
-        android:text="overcast clouds"
         app:layout_constraintBottom_toTopOf="@+id/seeWeatherBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/descLabel" />
+
     <Button
         android:id="@+id/seeWeatherBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:onClick="clickedGo2Map"
+        android:layout_marginStart="16dp"
         android:text="See Weather on Map"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editTxt_lng"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="89dp" />
+
     <EditText
         android:id="@+id/editTxt_lng"
         android:layout_width="0dp"
@@ -116,6 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tempLabel" />
+
     <EditText
         android:id="@+id/editTxt_lat"
         android:layout_width="411dp"
@@ -127,6 +135,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.704" />
+
     <TextView
         android:id="@+id/txt_location_info"
         android:layout_width="358dp"
@@ -138,6 +147,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.871" />
+
     <Button
         android:id="@+id/buttonGo2Map"
         android:layout_width="wrap_content"
@@ -150,6 +160,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_location_info"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="89dp" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -162,4 +173,5 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_location_info"
         tools:layout_conversion_absoluteHeight="48dp"
         tools:layout_conversion_absoluteWidth="120dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
