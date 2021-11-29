@@ -188,10 +188,10 @@ public class MainActivity extends AppCompatActivity {
         //String strLat = editTextLat.getText().toString();
         //EditText editTextLng = findViewById(R.id.editTxt_lng);
         //String strLng = editTextLng.getText().toString();
-
         intent.putExtra("LAT", lat);
         intent.putExtra("LNG", lon);
-
+        intent.putExtra("temp",tempTxtView.getText().toString());
+        intent.putExtra("desc",descTxtView.getText().toString());
         startActivity(intent);
     }
     private boolean hasLocationPermission() {

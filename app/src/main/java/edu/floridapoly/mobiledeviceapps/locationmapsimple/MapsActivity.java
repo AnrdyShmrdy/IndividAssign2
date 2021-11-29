@@ -23,6 +23,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     private LatLng mCurrentLocation;
+    private String strTemp;
+    private String strDesc;
     private Double dblLat;
     private Double dblLng;
 
@@ -35,9 +37,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle bundle = intent.getExtras();
         String strLat;
         String strLng;
+
         if(bundle != null){
             strLat = bundle.getString("LAT");
             strLng = bundle.getString("LNG");
+            strTemp = bundle.getString("temp");
+            strDesc = bundle.getString("desc");
             dblLat = Double.valueOf(strLat);
             dblLng = Double.valueOf(strLng);
         }
@@ -83,22 +88,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng myPoint = new LatLng(
                 mCurrentLocation.latitude, mCurrentLocation.longitude);
         MarkerOptions myMarker = new MarkerOptions()
-                .position(myPoint);
+                .position(myPoint)
+                .title("Temp: " + strTemp + " - " + "Description: " + strDesc);
         mMap.clear();
-        mMap.addMarker(myMarker);
-
-        LatLng mCurrentLocation2 = new LatLng(dblLat+1, dblLng+1);
-        LatLng myPoint2 = new LatLng(
-                mCurrentLocation2.latitude, mCurrentLocation2.longitude);
+        mMap.addMarker(myMarker).showInfoWindow();
 
         LatLngBounds bounds = new LatLngBounds.Builder()
                 .include(myPoint)
-                .include(myPoint2)
                 .build();
 
         int margin = getResources().getDimensionPixelSize(R.dimen.map_inset_margin);
         CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds, margin);
         mMap.animateCamera(update);
+
     }
 
 }
